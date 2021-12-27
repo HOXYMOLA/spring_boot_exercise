@@ -7,9 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entitiy.Memo;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -113,21 +115,51 @@ public class MemoRepositoryTests {
 //        }
 //    }
 
+//    @Test
+//    public void testSort() {
+//
+//        Sort sort1 = Sort.by("mno").descending();
+//        Sort sort2 = Sort.by("memoText").ascending();
+//        Sort sortAll = sort1.and(sort2); //and를 이용한 연결
+//
+//        Pageable pageable = PageRequest.of(0, 10, sortAll); //결합된 정렬 조건 사용
+//
+//        Page<Memo> result = memoRepository.findAll(pageable);
+//
+//        result.get().forEach(memo -> {
+//            System.out.println(memo);
+//        });
+//
+//    }
+
+//    @Test
+//    public void testQueryMethod() {
+//
+//        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoDesc(70L, 80L);
+//
+//        for (Memo memo : list) {
+//            System.out.println(memo);
+//        }
+//    }
+
+//    @Test
+//    public void testQueryMethod(){
+//
+//        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+//
+//        Page<Memo> result = memoRepository.findByMnoBetween(10L, 50L, pageable);
+//
+//        result.get().forEach(memo ->System.out.println(memo));
+//
+//    }
+
+    @Commit
+    @Transactional
     @Test
-    public void testSort() {
+    public void testDeleteQueryMethods() {
 
-        Sort sort1 = Sort.by("mno").descending();
-        Sort sort2 = Sort.by("memoText").ascending();
-        Sort sortAll = sort1.and(sort2); //and를 이용한 연결
+        memoRepository.deleteMemoByMnoLessThan(10L);
 
-        Pageable pageable = PageRequest.of(0, 10, sortAll); //결합된 정렬 조건 사용
-
-        Page<Memo> result = memoRepository.findAll(pageable);
-
-        result.get().forEach(memo -> {
-            System.out.println(memo);
-        });
-        
     }
 
 }
