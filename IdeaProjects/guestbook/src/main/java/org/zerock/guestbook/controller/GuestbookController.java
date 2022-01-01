@@ -66,7 +66,7 @@ public class GuestbookController {
         model.addAttribute("dto", dto);
     }
 
-    @GetMapping("/remove")
+    @PostMapping("/remove")
     public String remove(long gno, RedirectAttributes redirectAttributes){
 
         log.info("gno: " + gno);
